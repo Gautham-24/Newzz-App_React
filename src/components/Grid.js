@@ -15,17 +15,29 @@ export default function Grid(props) {
     case "us":
       country = "USA";
       break;
-    case "in":
-      country = "India";
+    case "gb":
+      country = "UK";
+      break;
+    case "jp":
+      country = "Japan";
       break;
     default:
-      country = "India";
+      country = "The World";
       break;
   }
-
+  var apiUrl;
+  if (props.query) {
+    console.log(props.query);
+    apiUrl = `https://newsapi.org/v2/top-headlines?q=${props.query}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
+  } else {
+    apiUrl =
+      props.country === "world"
+        ? `https://newsapi.org/v2/top-headlines?category=${props.category}&language=en&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`
+        : `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
+  }
   const update = async () => {
     setLoading(true);
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
+    const url = apiUrl;
     let data = await fetch(url);
     let parsedData = await data.json();
     setArticles(parsedData.articles);
@@ -60,9 +72,10 @@ export default function Grid(props) {
       ) : (
         <>
           <h1 className="text-5xl text-center font-mono my-2">
-            Newzz - Top{" "}
-            {props.category === "general" ? "" : capitalize(props.category)}{" "}
-            News In {country}
+            {!props.query &&
+              `Newzz - Top ${
+                props.category === "general" ? "" : capitalize(props.category)
+              } News In ${country}`}
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 p-2">
             {articles.map((element) => {

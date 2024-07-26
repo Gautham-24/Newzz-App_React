@@ -1,23 +1,28 @@
-import React from 'react';
+import React from "react";
 
 export default function Card(props) {
   return (
     <div className=" bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-2 flex flex-col">
       <a href="#">
-        <img className="rounded-t-lg w-full h-48" src={props.img?props.img:"news.jpg"} alt="img" />
+        <img
+          className="rounded-t-lg w-full h-48"
+          src={props.img ? props.img : "news.jpg"}
+          alt="img"
+        />
       </a>
       <div className="p-3 flex flex-col flex-grow">
         <a href="#">
           <h5 className="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
-            {props.title?props.title:'---NA---'}
+            {props.title ? props.title : "---NA---"}
           </h5>
         </a>
         <p className="mb-3 text-sm font-normal text-gray-700 dark:text-gray-400 flex-grow">
-          {props.desc?props.desc:'---NA---  '}
+          {props.desc ? props.desc : "---NA---  "}
         </p>
         <div className="mt-auto">
           <a
             href={props.source}
+            target="_blank"
             className="inline-flex items-center px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Read more
