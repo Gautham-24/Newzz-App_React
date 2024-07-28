@@ -71,12 +71,14 @@ export default function Grid(props) {
         <Loading />
       ) : (
         <>
-          <h1 className="text-5xl text-center font-mono my-2">
+          <h1 class="my-4 text-4xl text-center font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+            {" "}
             {!props.query &&
               `Newzz - Top ${
                 props.category === "general" ? "" : capitalize(props.category)
               } News In ${country}`}
           </h1>
+          <h1 className="text-5xl text-center font-mono my-2"></h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 p-2">
             {articles.map((element) => {
               return (
@@ -86,6 +88,9 @@ export default function Grid(props) {
                     desc={element.description}
                     img={element.urlToImage}
                     source={element.url}
+                    author={element.author}
+                    date={element.publishedAt}
+                    src={element.source.name}
                   />
                 </div>
               );
